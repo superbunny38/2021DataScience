@@ -7,8 +7,6 @@
 
 #데이터 셋 불러오기 및 기본 정보 보기
 housing.df <- read.csv("WestRoxbury.csv", header=TRUE)
-without.header <- read.csv("WestRoxbury.csv", header = FALSE)
-head(without.header)
 dim(housing.df)#rowxcolumn
 head(housing.df)#show first 6 rows
 View(housing.df)#뷰어창에서 데이터 확인
@@ -58,26 +56,17 @@ housing.df[s,]$ROOMS
 
 #변수명: names()
 names(housing.df)#변수 명
-colnames(housing.df)
 t(names(housing.df))#transpose
 t(t(names(housing.df)))
 t(t(names(housing.df))) == names(housing.df)#TRUE이긴 한데 약간 다름
 
-levels(housing.df$REMODEL)
-housing.df$REMODEL
-
 #column 이름: colnames()
 colnames(housing.df)[1]#첫번째 column name
 colnames(housing.df)[1] <- c("TOTAL_VALUE")#첫번째 column 이름 바꾸기
-rownames(housing.df)
-row.names(housing.df)
-#col.names(housing.df): 오류남
 
 #변수 종류: class()
-class(housing.df)
 class(housing.df$REMODEL)#REMODEL 변수의 종류:character
 class(housing.df$TOTAL_VALUE)#numeric
-class(housing.df[1,1])
 
 ##가변수 생성
 #데이터프레임 내의 변수를 (수치로 구성된) 메트릭스 형태로   변환
@@ -86,25 +75,10 @@ class(housing.df[1,1])
 #REMODEL(categorical variable)을 subcategory로 나누고 가변수를 만듦
 xtotal <- model.matrix(~0+BEDROOMS+REMODEL,data = housing.df)#matrix로 변환
 xtotal <- as.data.frame(xtotal)#매트릭스 가시화를 위해 데이터 프레임으로 변환
-head(xtotal)
+#head(xtotal)
 
-xtotal2 <- model.matrix(~0+REMODEL+BEDROOMS,data = housing.df)#matrix로 변환
-xtotal2 <- data.frame(xtotal2)#매트릭스 가시화를 위해 데이터 프레임으로 변환
-head(xtotal)
 
-housing.df$BEDROOMS[1:10]#수치형
-housing.df$REMODEL[1:10]#문자형
 
-try <- model.matrix(~REMODEL, data = housing.df)#with intercept
-try <- as.data.frame(try)
-head(try)
-x.total <- model.matrix(BEDROOMS)
-
-try <- model.matrix(~0+REMODEL, data = housing.df)#without intercept
-try <- as.data.frame(try)
-head(try)
-
-x.total <- model.matrix(BEDROOMS)
 ##### 결측치 대체
 
 #테스트를 위해 결측치 무작위 생성
@@ -144,10 +118,6 @@ test.data <- housing.df[test.rows,]
 #.: 나머지 모든 것
 reg <- lm(TOTAL_VALUE ~ ., data = housing.df, subset = train.rows)#subset = train.rows: train row만 진행
 tr.res <- data.frame(train.data$TOTAL_VALUE, reg$fitted.values, reg$residuals)#fitted.values: y_hat, residuals: y-y_hat
-
-
-# reg2 <- lm(TOTAL_VALUE ~., data = train.data) reg와 다름
-
 
 #검증 데이터를 이용한 예측 및 검증 성능 파악
 pred <- predict(reg, newdata = valid.data)

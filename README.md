@@ -4,3 +4,4 @@
 - Datamining/BusinessAnalyticsProblemSolving: Data Mining For Business Analytics Problems Solutions
 - Datamining: Codes from the book 'Data Mining for Business Analytics'
 - Datamining/*.pdf: Stanford CS229
+- Mathematics for Machine Learning (7회독)

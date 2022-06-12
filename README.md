@@ -6,3 +6,4 @@
 - Datamining: Codes from the book 'Data Mining for Business Analytics'
 - Datamining/*.pdf: Stanford CS229
 - Mathematics for Machine Learning (7회독 목표: 1/7)
+- Probability and Statistics (SKKU, Prof. 마난 무함마드)
